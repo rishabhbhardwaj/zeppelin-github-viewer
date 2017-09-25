@@ -6,21 +6,64 @@ if(finalPath.length !=0 ) {
   fileName = finalPath[0].innerText
   console.log("File Name is: "+ fileName);
 
-  if(fileName == "manifest.json") {
-    var gitDiv = document.getElementsByClassName("file")[0]
-    console.log("gitDiv loaded"+ gitDiv.innerText)
+  if(fileName == "note.json") {
+    var dataDiv = document.getElementsByClassName("data")[0];
+    var data = dataDiv.innerText;
+    var dataObj = JSON.parse(data);
+    console.log(dataObj);
 
-    var outerDiv = document.createElement("div")
-    var data = document.createTextNode("<h3>Hello World</h3>")
-    outerDiv.appendChild(data)
-    console.log(outerDiv.textContent)
 
-    // gitDiv.outerHtml = outerDiv.textContent
-    // gitDiv.textContent = outerDiv.textContent
-    $("div.file").html(outerDiv.textContent)
+    var outerView = document.createElement("div");
+    // Add name
+    var nameDiv = document.createElement("div");
+    nameDiv.setAttribute('class','nbName');
+    var nameText = document.createTextNode("<h4> "+ dataObj.name + "</h4>");
+    nameDiv.appendChild(nameText);
 
-    console.log("Update.." + gitDiv.innerHtml)
-    console.log("Update.." + gitDiv.outerHtml)
+    //Add paragraphs
+    var paragraphsDiv = document.createElement("div");
+    var paragraphs = dataObj.paragraphs
+    console.log(paragraphs);
+
+    for (i = 0; i < paragraphs.length; i++) {
+       var paragraph = paragraphs[i];
+       if(paragraph.hasOwnProperty('text')) {
+         var pElement = document.createElement("div");
+         pElement.setAttribute('id', 'p'+i);
+         pElement.setAttribute('class','cellCard mdl-grid mdl-card mdl-shadow--4dp');
+
+         var codeElement = document.createElement("div");
+         codeElement.setAttribute('id', 'code'+i);
+         codeElement.setAttribute('class','codeText');
+        //  console.log("text: "+paragraph.text);
+         codeElement.innerText = paragraph.text + "<br/>";
+         pElement.appendChild(codeElement);
+
+         var outputElement = document.createElement("div");
+         outputElement.setAttribute('id', 'out'+i);
+         outputElement.setAttribute('class', 'codeOutput mdl-card__supporting-text mdl-card--border mdl-cell--12-col');
+        //  console.log("text: "+paragraph.results.msg[0].data);
+         outputElement.innerText = paragraph.results.msg[0].data + "<br/>";
+         pElement.appendChild(outputElement);
+
+         var statusElement = document.createElement("div");
+         statusElement.setAttribute('id', 'status'+i);
+         statusElement.setAttribute('class', 'mdl-cell mdl-cell--1-col');
+         var statusSpan = document.createElement("span");
+         statusSpan.setAttribute('class','statusChip mdl-chip');
+         statusSpan.innerHtml = ' <span class="mdl-chip__text" th:text='+paragraph.status+'></span>';
+         statusElement.appendChild(statusSpan);
+         pElement.appendChild(statusElement);
+
+         paragraphsDiv.appendChild(pElement);
+       }
+    }
+
+
+    outerView.appendChild(nameDiv);
+    outerView.appendChild(paragraphsDiv);
+
+    $("div.data").html(outerView.textContent)
   } else {
     console.log("Desired file not found")
   }
