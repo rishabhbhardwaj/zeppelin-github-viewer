@@ -8,6 +8,8 @@
   "content_scripts": [{
     "css": ["css/style.css","css/default.min.css", "css/material.indigo-pink.min.css"],
     "js": ["js/jquery-3.2.1.min.js","content.js","js/material.min.js"],
-    "matches": ["https://*.github.com/*/blob/*/*"]
+    "matches": ["https://*.github.com/*/blob/*/*"],
+    "run_at": "document_end"
+
   }]
 }

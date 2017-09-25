@@ -46,14 +46,16 @@ if(finalPath.length !=0 ) {
          outputElement.innerText = paragraph.results.msg[0].data + "<br/>";
          pElement.appendChild(outputElement);
 
-         var statusElement = document.createElement("div");
-         statusElement.setAttribute('id', 'status'+i);
-         statusElement.setAttribute('class', 'mdl-cell mdl-cell--1-col');
-         var statusSpan = document.createElement("span");
-         statusSpan.setAttribute('class','statusChip mdl-chip');
-         statusSpan.innerHtml = ' <span class="mdl-chip__text" th:text='+paragraph.status+'></span>';
-         statusElement.appendChild(statusSpan);
-         pElement.appendChild(statusElement);
+        //  var statusElement = document.createElement("div");
+        //  statusElement.setAttribute('id', 'status'+i);
+        //  statusElement.setAttribute('class', 'mdl-cell mdl-cell--1-col');
+        //  var statusSpan = document.createElement("span");
+        //  statusSpan.setAttribute('class','statusChip mdl-chip');
+        //  console.log(paragraph.status);
+        //  statusSpan.innerHTML = '<span class="mdl-chip__text">'+paragraph.status+'</span>';
+        //  statusElement.appendChild(statusSpan);
+        //  pElement.appendChild(statusElement);
+
 
          paragraphsDiv.appendChild(pElement);
        }
