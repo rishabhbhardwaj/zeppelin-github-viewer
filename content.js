@@ -1,4 +1,3 @@
-
 console.log("Checking Zeppelin Viewer...")
 var finalPath =  document.getElementsByClassName("final-path");
 if(finalPath.length !=0 ) {
@@ -9,6 +8,7 @@ if(finalPath.length !=0 ) {
   if(fileName == "note.json") {
     var dataDiv = document.getElementsByClassName("data")[0];
     var data = dataDiv.innerText;
+    // console.log(data);
     var dataObj = JSON.parse(data);
     console.log(dataObj);
 
