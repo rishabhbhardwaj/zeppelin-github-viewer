@@ -26,44 +26,56 @@ if(finalPath.length !=0 ) {
     console.log(paragraphs);
 
     for (i = 0; i < paragraphs.length; i++) {
-       var paragraph = paragraphs[i];
-       if(paragraph.hasOwnProperty('text')) {
-         var pElement = document.createElement("div");
-         pElement.setAttribute('id', 'p'+i);
-         pElement.setAttribute('class','cellCard mdl-grid mdl-card mdl-shadow--4dp');
+      var paragraph = paragraphs[i];
+      if(paragraph.hasOwnProperty('text')) {
+        var pElement = document.createElement("div");
+        pElement.setAttribute('id', 'p'+i);
+        // pElement.setAttribute('class','cellCard mdl-grid mdl-card mdl-shadow--4dp');
+        pElement.setAttribute('class','cellCard');
 
-         var codeElement = document.createElement("div");
-         codeElement.setAttribute('id', 'code'+i);
-         codeElement.setAttribute('class','codeText');
+        var codeElement = document.createElement("div");
+        codeElement.setAttribute('id', 'code'+i);
+        codeElement.setAttribute('class','codeText');
         //  console.log("text: "+paragraph.text);
-         codeElement.innerText = paragraph.text;
-         pElement.appendChild(codeElement);
+        codeElement.innerText = paragraph.text;
+        pElement.appendChild(codeElement);
 
-         var outputElement = document.createElement("div");
-         outputElement.setAttribute('id', 'out'+i);
-         outputElement.setAttribute('class', 'codeOutput mdl-card__supporting-text mdl-card--border mdl-cell--12-col');
+        var outputElement = document.createElement("div");
+        outputElement.setAttribute('id', 'out'+i);
+        // outputElement.setAttribute('class', 'codeOutput mdl-card__supporting-text mdl-card--border mdl-cell--12-col');
+        outputElement.setAttribute('class', 'codeOutput');
         //  console.log("text: "+paragraph.results.msg[0].data);
-         outputElement.innerText = paragraph.results.msg[0].data;
-         pElement.appendChild(outputElement);
+        outputElement.innerText = paragraph.results.msg[0].data;
+        pElement.appendChild(outputElement);
 
-         var statusElement = document.createElement("div");
-         statusElement.setAttribute('id', 'status'+i);
-         statusElement.setAttribute('class', 'mdl-cell mdl-cell--1-col');
-         var statusSpan = document.createElement("span");
-         statusSpan.setAttribute('class','statusChip mdl-chip');
-        //  console.log(paragraph.status);
-         statusSpan.innerHTML = '<span class="mdl-chip__text">'+paragraph.status+'</span>';
-         statusElement.appendChild(statusSpan);
-         pElement.appendChild(statusElement);
+        //  var statusElement = document.createElement("div");
+        //  statusElement.setAttribute('id', 'status'+i);
+        //  statusElement.setAttribute('class', 'mdl-cell mdl-cell--1-col');
+        //  var statusSpan = document.createElement("span");
+        //  statusSpan.setAttribute('class','statusChip mdl-chip');
+        // //  console.log(paragraph.status);
+        //  statusSpan.innerHTML = '<span class="mdl-chip__text">'+paragraph.status+'</span>';
+        //  statusElement.appendChild(statusSpan);
+        //  pElement.appendChild(statusElement);
+
+        var user = paragraph.user;
+        var dateStarted = paragraph.dateStarted;
+        var dateFinished = paragraph.dateFinished;
+        var executionTime = ((new Date(dateFinished)).getTime() - (new Date(dateStarted)).getTime())/1000
+        var timeSpan = document.createElement("span");
+        timeSpan.setAttribute('class','executionTime');
+        timeSpan.innerText = "Took "+executionTime+" seconds. Last updated by "+user+" at "+dateStarted;
+        pElement.appendChild(timeSpan);
 
 
-         paragraphsDiv.appendChild(pElement);
-       }
+        paragraphsDiv.appendChild(pElement);
+      }
     }
 
 
     outerView.appendChild(nameDiv);
     outerView.appendChild(paragraphsDiv);
+
 
     $("div.data").html(outerView.innerHTML)
   } else {
