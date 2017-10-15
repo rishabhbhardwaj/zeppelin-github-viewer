@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Apache Zeppelin Github Viwer",
+  "name": "Apache Zeppelin Github Viewer",
   "version": "0.0.1",
   "description": "Github Viewer for Apache Zeppelin",
 
